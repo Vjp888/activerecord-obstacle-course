@@ -370,11 +370,10 @@ describe 'ActiveRecord Obstacle Course' do
     #   ORDER BY users.name")
     # users = users.map {|u| u['name']}
     # ------------------------------------------------------------
-    users = Order.joins(:items, :users)
-    binding.pry
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-
+    user_id = @item_8.orders.select(:user_id).distinct.pluck(:user_id)
+    users = User.where(id: user_id).pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
