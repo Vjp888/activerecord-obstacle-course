@@ -374,6 +374,7 @@ describe 'ActiveRecord Obstacle Course' do
     # Solution goes here
     user_id = @item_8.orders.select(:user_id).distinct.pluck(:user_id)
     users = User.where(id: user_id).pluck(:name)
+    #should have used a joins
     # ------------------------------------------------------------
 
     # Expectation
@@ -423,11 +424,12 @@ describe 'ActiveRecord Obstacle Course' do
 
   it '19. returns the average amount for all orders' do
     # ---------------------- Using Ruby -------------------------
-    average = (Order.all.map(&:amount).inject(:+)) / (Order.count)
+    # average = (Order.all.map(&:amount).inject(:+)) / (Order.count)
     # -----------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    average = Order.average(:amount)
     # ------------------------------------------------------------
 
     # Expectation
